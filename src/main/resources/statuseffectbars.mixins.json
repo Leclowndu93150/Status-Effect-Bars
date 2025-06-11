@@ -9,6 +9,7 @@
     "StatusEffectInstanceMixin"
   ],
   "client": [
+    "GuiMixin",
     "StatusEffectsDisplayMixin"
   ],
   "injectors": {
