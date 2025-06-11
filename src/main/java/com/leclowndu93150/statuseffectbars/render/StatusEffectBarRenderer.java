@@ -2,16 +2,17 @@ package com.leclowndu93150.statuseffectbars.render;
 
 import com.leclowndu93150.statuseffectbars.config.StatusEffectBarsConfig;
 import com.leclowndu93150.statuseffectbars.duck.StatusEffectInstanceDuck;
-import net.minecraft.client.DeltaTracker;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.util.Mth;
 import net.minecraft.world.effect.MobEffectInstance;
-import org.jetbrains.annotations.Nullable;
+
+import javax.annotation.Nullable;
 
 public class StatusEffectBarRenderer {
 
     @SuppressWarnings("SuspiciousNameCombination")
-    public static void render(GuiGraphics context, @Nullable DeltaTracker tickCounter, MobEffectInstance effect, int x, int y, int width, int height, StatusEffectBarsConfig.LayoutConfig layoutConfig) {
+    public static void render(GuiGraphics context, MobEffectInstance effect, int x, int y, int width, int height, StatusEffectBarsConfig.LayoutConfig layoutConfig) {
         // Special cases where the bar is hidden
 
         if (!layoutConfig.enabled.get()) return;
@@ -53,9 +54,8 @@ public class StatusEffectBarRenderer {
             endX = tmp;
         }
 
-        float tickDelta = tickCounter != null
-                ? tickCounter.getGameTimeDeltaPartialTick(false)
-                : 0;
+        float tickDelta = Minecraft.getInstance().getPartialTick();
+
         float progress = (effect.getDuration() - tickDelta) / ((StatusEffectInstanceDuck) effect).statusEffectBars_getMaxDuration();
         //TODO: Casting to int ??
         middleX = (int) Mth.lerp(progress, startX, endX);

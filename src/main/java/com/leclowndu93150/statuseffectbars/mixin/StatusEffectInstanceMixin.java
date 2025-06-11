@@ -20,7 +20,7 @@ public abstract class StatusEffectInstanceMixin implements StatusEffectInstanceD
     @Unique private int status_Effect_Bars$maxDuration;
     @Shadow private int duration;
 
-    @Inject(method = "<init>(Lnet/minecraft/core/Holder;IIZZZLnet/minecraft/world/effect/MobEffectInstance;)V",
+    @Inject(method = "<init>(Lnet/minecraft/world/effect/MobEffect;IIZZZLnet/minecraft/world/effect/MobEffectInstance;Ljava/util/Optional;)V",
             at = @At("RETURN"))
     private void onInit(CallbackInfo ci) {
         status_Effect_Bars$maxDuration = duration;

@@ -8,14 +8,14 @@ import java.util.function.ToIntBiFunction;
 
 public enum ColorMode {
     EFFECT_COLOR(
-            (config, effect) -> effect.getEffect().value().getColor() | 0xff000000
+            (config, effect) -> effect.getEffect().getColor() | 0xff000000
     ),
     @SuppressWarnings({"ConstantConditions", "unused"})
     CATEGORY_COLOR(
-            (config, effect) -> effect.getEffect().value().getCategory().getTooltipFormatting().getColor() | 0xff000000
+            (config, effect) -> effect.getEffect().getCategory().getTooltipFormatting().getColor() | 0xff000000
     ),
     @SuppressWarnings("unused") CUSTOM(
-            (config, effect) -> switch (effect.getEffect().value().getCategory()) {
+            (config, effect) -> switch (effect.getEffect().getCategory()) {
                 case BENEFICIAL -> config.beneficialForegroundColor.get();
                 case HARMFUL -> config.harmfulForegroundColor.get();
                 default -> config.neutralForegroundColor.get();

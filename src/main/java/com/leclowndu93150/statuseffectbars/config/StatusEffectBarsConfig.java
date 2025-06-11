@@ -1,36 +1,36 @@
 package com.leclowndu93150.statuseffectbars.config;
 
 import net.minecraft.world.effect.MobEffectInstance;
-import net.neoforged.neoforge.common.ModConfigSpec;
+import net.minecraftforge.common.ForgeConfigSpec;
 import org.apache.commons.lang3.tuple.Pair;
 
 public class StatusEffectBarsConfig {
-    public static final ModConfigSpec SPEC;
+    public static final ForgeConfigSpec SPEC;
     public static final StatusEffectBarsConfig INSTANCE;
 
     static {
-        Pair<StatusEffectBarsConfig, ModConfigSpec> pair = new ModConfigSpec.Builder()
+        Pair<StatusEffectBarsConfig, ForgeConfigSpec> pair = new ForgeConfigSpec.Builder()
                 .configure(StatusEffectBarsConfig::new);
         INSTANCE = pair.getLeft();
         SPEC = pair.getRight();
     }
 
     // Color
-    public final ModConfigSpec.EnumValue<ColorMode> colorMode;
-    public final ModConfigSpec.IntValue backgroundColor;
-    public final ModConfigSpec.IntValue beneficialForegroundColor;
-    public final ModConfigSpec.IntValue harmfulForegroundColor;
-    public final ModConfigSpec.IntValue neutralForegroundColor;
+    public final ForgeConfigSpec.EnumValue<ColorMode> colorMode;
+    public final ForgeConfigSpec.IntValue backgroundColor;
+    public final ForgeConfigSpec.IntValue beneficialForegroundColor;
+    public final ForgeConfigSpec.IntValue harmfulForegroundColor;
+    public final ForgeConfigSpec.IntValue neutralForegroundColor;
 
     // Behavior
-    public final ModConfigSpec.IntValue maxRemainingDuration;
-    public final ModConfigSpec.IntValue minAmbientAge;
+    public final ForgeConfigSpec.IntValue maxRemainingDuration;
+    public final ForgeConfigSpec.IntValue minAmbientAge;
 
     // Layout
     public final LayoutConfig hudLayout;
     public final LayoutConfig inventoryLayout;
 
-    public StatusEffectBarsConfig(ModConfigSpec.Builder builder) {
+    public StatusEffectBarsConfig(ForgeConfigSpec.Builder builder) {
         builder.push("color");
 
         colorMode = builder
@@ -90,15 +90,15 @@ public class StatusEffectBarsConfig {
     }
 
     public static class LayoutConfig {
-        public final ModConfigSpec.BooleanValue enabled;
-        public final ModConfigSpec.EnumValue<Direction> direction;
-        public final ModConfigSpec.BooleanValue relativeToEnd;
-        public final ModConfigSpec.IntValue thickness;
-        public final ModConfigSpec.IntValue collinearPadding;
-        public final ModConfigSpec.IntValue collinearOffset;
-        public final ModConfigSpec.IntValue orthogonalOffset;
+        public final ForgeConfigSpec.BooleanValue enabled;
+        public final ForgeConfigSpec.EnumValue<Direction> direction;
+        public final ForgeConfigSpec.BooleanValue relativeToEnd;
+        public final ForgeConfigSpec.IntValue thickness;
+        public final ForgeConfigSpec.IntValue collinearPadding;
+        public final ForgeConfigSpec.IntValue collinearOffset;
+        public final ForgeConfigSpec.IntValue orthogonalOffset;
 
-        public LayoutConfig(ModConfigSpec.Builder builder, String name, int defaultCollinearPadding, int defaultOrthogonalOffset) {
+        public LayoutConfig(ForgeConfigSpec.Builder builder, String name, int defaultCollinearPadding, int defaultOrthogonalOffset) {
             builder.push(name);
 
             enabled = builder

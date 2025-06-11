@@ -18,9 +18,9 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public abstract class StatusEffectsDisplayMixin {
 
     @Inject(method = "renderBackgrounds",
-            at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/GuiGraphics;blitSprite(Lnet/minecraft/resources/ResourceLocation;IIII)V", shift = At.Shift.AFTER))
+            at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/GuiGraphics;blit(Lnet/minecraft/resources/ResourceLocation;IIIIII)V", shift = At.Shift.AFTER))
     private void onDrawStatusEffectBackground(GuiGraphics context, int x, int height, Iterable<MobEffectInstance> effects, boolean wide, CallbackInfo ci, @Local(ordinal = 2) int y, @Local MobEffectInstance effect) {
-        StatusEffectBarRenderer.render(context, null, effect, x, y, wide ? 120 : 32, 32, StatusEffectBarsConfig.INSTANCE.inventoryLayout);
+        StatusEffectBarRenderer.render(context, effect, x, y, wide ? 120 : 32, 32, StatusEffectBarsConfig.INSTANCE.inventoryLayout);
     }
 
 }

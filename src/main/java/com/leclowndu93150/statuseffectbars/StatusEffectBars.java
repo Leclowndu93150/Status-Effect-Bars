@@ -1,24 +1,16 @@
 package com.leclowndu93150.statuseffectbars;
 
 import com.leclowndu93150.statuseffectbars.config.StatusEffectBarsConfig;
-import net.minecraft.client.gui.Gui;
-import net.neoforged.bus.api.IEventBus;
-import net.neoforged.fml.ModContainer;
-import net.neoforged.fml.common.Mod;
-import net.neoforged.fml.config.ModConfig;
-import net.neoforged.neoforge.client.event.ScreenEvent;
-import net.neoforged.neoforge.client.gui.ConfigurationScreen;
-import net.neoforged.neoforge.client.gui.IConfigScreenFactory;
+import net.minecraftforge.fml.ModLoadingContext;
+import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.config.ModConfig;
 
 @Mod(StatusEffectBars.MODID)
 public class StatusEffectBars {
     public static final String MODID = "statuseffectbars";
 
-    public StatusEffectBars(IEventBus modEventBus, ModContainer modContainer) {
+    public StatusEffectBars() {
 
-        modContainer.registerConfig(ModConfig.Type.COMMON, StatusEffectBarsConfig.SPEC);
-        modContainer.registerExtensionPoint(IConfigScreenFactory.class, ConfigurationScreen::new);
+        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, StatusEffectBarsConfig.SPEC);
     }
-
-
 }
