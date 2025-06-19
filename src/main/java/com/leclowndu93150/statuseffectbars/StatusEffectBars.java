@@ -15,7 +15,7 @@ public class StatusEffectBars {
 
     public StatusEffectBars() {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
-        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, StatusEffectBarsConfig.SPEC);
+        ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, StatusEffectBarsConfig.SPEC);
         modEventBus.addListener(this::commonSetup);
     }
 

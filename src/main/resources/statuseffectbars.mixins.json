@@ -5,13 +5,13 @@
   "compatibilityLevel": "JAVA_8",
   "refmap": "statuseffectbars.refmap.json",
   "mixins": [
-    "LivingEntityMixin",
-    "StatusEffectInstanceMixin",
-    "compat.StylishEffectsCompatMixin"
   ],
   "client": [
     "GuiMixin",
-    "StatusEffectsDisplayMixin"
+    "StatusEffectsDisplayMixin",
+    "LivingEntityMixin",
+    "StatusEffectInstanceMixin",
+    "compat.StylishEffectsCompatMixin"
   ],
   "injectors": {
     "defaultRequire": 1
