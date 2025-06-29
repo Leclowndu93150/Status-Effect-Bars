@@ -6,7 +6,8 @@
   "refmap": "statuseffectbars.refmap.json",
   "mixins": [
     "LivingEntityMixin",
-    "StatusEffectInstanceMixin"
+    "StatusEffectInstanceMixin",
+    "compat.StylishEffectsCompatMixin"
   ],
   "client": [
     "GuiMixin",
