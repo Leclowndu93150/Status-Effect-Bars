@@ -3,7 +3,7 @@ package com.leclowndu93150.statuseffectbars.render;
 import com.leclowndu93150.statuseffectbars.config.StatusEffectBarsConfig;
 import com.leclowndu93150.statuseffectbars.duck.StatusEffectInstanceDuck;
 import net.minecraft.client.DeltaTracker;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.util.Mth;
 import net.minecraft.world.effect.MobEffectInstance;
 import org.jetbrains.annotations.Nullable;
@@ -11,19 +11,17 @@ import org.jetbrains.annotations.Nullable;
 public class StatusEffectBarRenderer {
 
     @SuppressWarnings("SuspiciousNameCombination")
-    public static void render(GuiGraphics context, @Nullable DeltaTracker tickCounter, MobEffectInstance effect, int x, int y, int width, int height, StatusEffectBarsConfig.LayoutConfig layoutConfig) {
-        // Special cases where the bar is hidden
-
+    public static void render(GuiGraphicsExtractor context, @Nullable DeltaTracker tickCounter, MobEffectInstance effect, int x, int y, int width, int height, StatusEffectBarsConfig.LayoutConfig layoutConfig) {
         if (!layoutConfig.enabled.get()) return;
 
         if (effect.getDuration() > StatusEffectBarsConfig.INSTANCE.maxRemainingDuration.get() || effect.isInfiniteDuration()) {
-            return; // Too much time remaining
+            return;
         }
 
         StatusEffectInstanceDuck duck = (StatusEffectInstanceDuck) effect;
         int age = duck.statusEffectBars_getMaxDuration() - effect.getDuration();
         if (effect.isAmbient() && age < StatusEffectBarsConfig.INSTANCE.minAmbientAge.get()) {
-            return; // Beacon effect too recent (will probably be refreshed soon)
+            return;
         }
 
         if (layoutConfig.direction.get().swapXY) {
@@ -32,16 +30,6 @@ public class StatusEffectBarRenderer {
             height = tmp;
         }
 
-        // start--------+-----end
-        // |            |       |
-        // +---------middle-----+
-        // or
-        // start----+
-        // |        |
-        // |        |
-        // +---middle
-        // |        |
-        // end------+
         int startX, middleX, endX;
         int startY, middleY, endY;
 
@@ -57,8 +45,7 @@ public class StatusEffectBarRenderer {
                 ? tickCounter.getGameTimeDeltaPartialTick(false)
                 : 0;
         float progress = (effect.getDuration() - tickDelta) / ((StatusEffectInstanceDuck) effect).statusEffectBars_getMaxDuration();
-        //TODO: Casting to int ??
-        middleX = (int) Mth.lerp(progress, startX, endX);
+        middleX = Mth.lerpInt(progress, startX, endX);
 
         startY = layoutConfig.orthogonalOffset.get();
         if (layoutConfig.relativeToEnd.get()) {
@@ -68,7 +55,6 @@ public class StatusEffectBarRenderer {
         endY = startY;
 
         if (layoutConfig.direction.get().swapXY) {
-            // Swapping X and Y to make the bar vertical instead of horizontal
             int tmp;
 
             tmp = startX;

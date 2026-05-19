@@ -15,20 +15,15 @@ public class StatusEffectBarsConfig {
         SPEC = pair.getRight();
     }
 
-    // Color
     public final ModConfigSpec.EnumValue<ColorMode> colorMode;
     public final ModConfigSpec.IntValue backgroundColor;
     public final ModConfigSpec.IntValue beneficialForegroundColor;
     public final ModConfigSpec.IntValue harmfulForegroundColor;
     public final ModConfigSpec.IntValue neutralForegroundColor;
 
-    // Behavior
     public final ModConfigSpec.IntValue maxRemainingDuration;
     public final ModConfigSpec.IntValue minAmbientAge;
-    public final ModConfigSpec.BooleanValue renderOldTimer;
-    public final ModConfigSpec.BooleanValue renderCustomTimer;
 
-    // Layout
     public final LayoutConfig hudLayout;
     public final LayoutConfig inventoryLayout;
 
@@ -78,18 +73,6 @@ public class StatusEffectBarsConfig {
                         "Default is 90 ticks (80 + 10)")
                 .translation("statuseffectbars.configuration.minAmbientAge")
                 .defineInRange("minAmbientAge", 90, 0, Integer.MAX_VALUE);
-
-        renderOldTimer = builder
-                .comment("Render the original Stylish Effects timer",
-                        "When false, the original timer is hidden")
-                .translation("statuseffectbars.configuration.renderOldTimer")
-                .define("renderOldTimer", false);
-
-        renderCustomTimer = builder
-                .comment("Render the custom timer for status effect bars when Stylish Effects is installed.",
-                        "When true, renders a smaller duration text at the top left of effects")
-                .translation("statuseffectbars.configuration.renderCustomTimer")
-                .define("renderCustomTimer", true);
 
         builder.pop();
 

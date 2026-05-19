@@ -11,9 +11,6 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-/**
- * Adds the {@link #status_Effect_Bars$maxDuration} attribute used for rendering.
- */
 @Mixin(MobEffectInstance.class)
 public abstract class StatusEffectInstanceMixin implements StatusEffectInstanceDuck {
 

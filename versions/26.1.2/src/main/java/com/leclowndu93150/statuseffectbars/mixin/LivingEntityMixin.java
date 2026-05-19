@@ -10,9 +10,6 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-/**
- * Prevents effects' max duration from being overwritten.
- */
 @Mixin(LivingEntity.class)
 public abstract class LivingEntityMixin {
 
@@ -23,14 +20,13 @@ public abstract class LivingEntityMixin {
                     target = "Lnet/minecraft/world/entity/LivingEntity;onEffectUpdated(Lnet/minecraft/world/effect/MobEffectInstance;ZLnet/minecraft/world/entity/Entity;)V"
             )
     )
-    private void onSetStatusEffect(MobEffectInstance instance, Entity entity, CallbackInfo ci, @Local(ordinal = 1) MobEffectInstance mobeffectinstance) {
-        if (mobeffectinstance != null && mobeffectinstance.getAmplifier() == instance.getAmplifier()) {
-            StatusEffectInstanceDuck duck = (StatusEffectInstanceDuck) instance;
-            StatusEffectInstanceDuck oldDuck = (StatusEffectInstanceDuck) mobeffectinstance;
+    private void onSetStatusEffect(MobEffectInstance newEffect, Entity source, CallbackInfo ci,
+                                   @Local(name = "previousEffect") MobEffectInstance previousEffect) {
+        if (previousEffect.getAmplifier() == newEffect.getAmplifier()) {
+            StatusEffectInstanceDuck duck = (StatusEffectInstanceDuck) newEffect;
+            StatusEffectInstanceDuck oldDuck = (StatusEffectInstanceDuck) previousEffect;
             if (duck.statusEffectBars_getMaxDuration() < oldDuck.statusEffectBars_getMaxDuration()) {
-                duck.statusEffectBars_setMaxDuration(
-                        oldDuck.statusEffectBars_getMaxDuration()
-                );
+                duck.statusEffectBars_setMaxDuration(oldDuck.statusEffectBars_getMaxDuration());
             }
         }
     }
