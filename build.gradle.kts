@@ -7,8 +7,6 @@ group = "com.leclowndu93150"
 version = "1.1.0"
 
 prism {
-    curseMaven()
-
     metadata {
         modId = "statuseffectbars"
         name = "Status Effect Bars Reforged"
@@ -20,10 +18,6 @@ prism {
     version("26.1.2") {
         neoforge {
             loaderVersion = "26.1.2.60-beta"
-
-            dependencies {
-                modCompileOnly("curse.maven:stylish-effects-543661:7995296")
-            }
         }
     }
 
@@ -38,10 +32,6 @@ prism {
         modrinth {
             accessToken = providers.environmentVariable("MODRINTH_TOKEN")
             projectId = "TxIuhIFo"
-        }
-
-        dependencies {
-            optional("stylish-effects")
         }
     }
 }
