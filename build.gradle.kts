@@ -17,12 +17,19 @@ prism {
 
     version("26.1.2") {
         neoforge {
-            loaderVersion = "26.1.2.60-beta"
+            loaderVersion = "26.1.2.103"
+        }
+    }
+
+    version("26.2") {
+        neoforge {
+            loaderVersion = "26.2.0.76"
         }
     }
 
     publishing {
         type = STABLE
+        changelog = "fix crash with latest neoforge + 26.2 port"
 
         curseforge {
             accessToken = providers.environmentVariable("CURSEFORGE_TOKEN")
